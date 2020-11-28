@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+        <h1>
+            {{name}}
+        </h1>
+    </div>
+    <div id="list">
+        <!-- <li></li> -->
+        <!-- <li></li> -->
+        <!-- <li></li> -->
+        <li v-for="item in movies">
+            {{item}}
+        </li>
+        <h1 id="count">当前计数:{{count}}</h1>
+        <!-- <button v-on:click = "count++">+</button><button v-on:click="count--">-</button> -->
+        <button v-on:click="plus">+</button><button v-on:click="sub">-</button>
+        <!-- v-on监听事件:点击 -->
+    </div>
+</body>
+<script>//声明式，响应式编程
+    let app = new Vue({
+        el: '#app',//用于挂载要管理的元素，把该元素传给vue这个实例
+        data: {//定义数据
+            message: 'Hello World', //挂载后，会检查特殊的语法，并且解析
+            name: 'Swimmming dog'//双向绑定
+        }
+    }) //创建了一个实例，用一个变量接受它
+    //let(es6定义变量) const(es6定义常量)均可
+    //传入了一个对象
+    let app2 = new Vue({
+        el: '#list',
+        data: {
+            message: 'Hello',
+            datas: ['周一划水', 'swimming'],
+            count: 0
+        },//定义数据
+        methods: {
+            plus: function () {
+                //count不要直接找count
+                this.count++ //在当前对象中查找
+            },
+            sub: function () {
+                this.count--
+            }
+        },//定义很多的函数
+    })
+</script>
+
+</html>

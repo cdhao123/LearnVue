@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="input">
+    <button @click="add">添加任务</button>
+    <li v-for="(items,index) in list">
+      {{items}}
+      <button @click="del(index)">删除</button>
+      <button @click="top(index)" >上移</button>
+      <button @click="down(index)" disabled="flag">下移</button>
+    </li>
+    <h1 v-once>
+      {{count}}
+      <button @click="plus">+</button><button v-on:click="sub">-</button>
+    </h1>
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      name: "Zhangsan",
+      list: ['划水', '吃饭', '睡觉', '摸鱼'],
+      count: 1,
+      mission: "划水",
+      input: "123",
+      flag: false
+    },
+    methods: {
+      plus: function () {
+        this.count++
+      },
+      sub: function () {
+        this.count--
+      },
+      add: function () {
+        // var input = document.querySelector("input")
+        this.list.push(this.input)
+      },
+      del: function (index) {
+        datas = []
+        var m = 0;
+        for (var i = 0; i < this.list.length; i++) {
+          if (i != index) {
+            datas[m] = this.list[i]
+            m++
+
+            // datas.push()
+          }
+        }
+        this.list = datas
+        // this.list=this.list.filter((item,i)=>i!=index);
+      },
+      top: function (index) {
+        if (index == 0) {
+          flag = false
+        }
+        else {
+          var tmp = this.list[index - 1]
+          Vue.set(this.list, index - 1, this.list[index])
+          Vue.set(this.list, index, tmp)
+        }
+
+      },
+      down: function (index) {
+        if (index == this.list.length) {
+        }
+        var tmp = this.list[index]
+        Vue.set(this.list, index, this.list[index + 1])
+        Vue.set(this.list, index + 1, tmp)
+      }
+    },
+  })
+</script>
+<!-- <style>
+</style> -->
+
+</html>

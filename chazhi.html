@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">{{num*2}}{{message}}{{str1+str2}}
+    <h1 v-once>{{message}}</h1>
+    <!-- v-once 不随数据的改变而改变 -->
+    <h1 v-html="url">{{url}}</h1>
+    <!-- v-html 将html解析 -->
+    <h1 v-text="message"></h1>
+    <h1 v-pre>{{message}}</h1>
+    <!-- 原封不动的显示，不解析 -->
+    <h1 v-cloak>{{message}}</h1>
+    <!-- 防止代码卡死时直接显示为解析的内容，解析之后会被删除-->
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello!",
+      str1: "aaaa",
+      str2: "Bbbb",
+      num:100,
+      url:'<a href="http://www.baidu.com">百度</a>'
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 用v-bind绑定属性 -->
+    <img v-bind:src="img_url" alt="">
+    <a v-bind:href="url">baidu</a>
+    <!-- v-bind语法糖 -->
+    <!-- <img src="" alt=""> -->
+    <!-- <img src="{{img_url}}" alt="">  错误做法，mustache只能用于能展示的部分-->
+    <!-- v-bind绑定class属性，选择性的给某个元素添加样式 -->
+    <h1 :class="status">{{message}}</h1>
+    <!-- class还可以绑定对象 -->
+    <!-- <h1 :class="{类名1:bool,类名2:bool}"></h1> 通过不同的布尔值，决定哪些类可以被添加 -->
+    <h1 :class="{text:istext,line:isline}" class="swim">{{message}}</h1><button @click="istext = !istext">单击改变颜色</button>
+    <!-- 通过改变bool值动态改变样式，同时，还可以写普通的class -->
+    <!-- 普通的class用来写固定样式 -->
+    <!-- 如果绑定的对象比较长，可以绑定method属性 -->
+    <h1 :class="getClass()">你好</h1>
+    <!-- 数组语法 但是是写死的,里面可以放变量-->
+    <h1 :class="['text','line',variable]">How are you</h1>
+  </div>
+</body>
+<style>
+  .swim{
+    background-color: royalblue;
+  }
+  .text{
+    color: red;
+  }
+  .line{
+    font-size: 50px;
+  }
+</style>
+<script>
+let app = new Vue({
+el:'#app',
+data:{
+message:'Hello',
+img_url:"https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png",
+url:"https://www.baidu.com",
+status:'active',
+istext:true,
+isline:false
+},
+methods: {
+  getClass:function (){
+    return {text:this.istext,line:this.isline}
+  }
+},
+})
+// v-bind 可以动态的绑定属性
+</script>
+</html>
