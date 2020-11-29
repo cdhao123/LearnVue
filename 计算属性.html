@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{getname()}}</h1>
+    <h1>{{fullname}}</h1>
+    <h1>总价格:{{totalPrice}}</h1>
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      msg: 'abcd',//全显示出来，并且留空格
+      books: [{
+        id: 100, name: 'unix编程艺术', price: 120
+      },
+      { id: 100, name: '代码大全', price: 120 },
+      { id: 100, name: '深入理解计算机原理', price: 120 },
+      { id: 100, name: '现代操作系统', price: 120 }
+      ]
+    },
+    methods: {
+      getname: function () {
+        return this.message + ' ' + this.msg
+      },
+    },//计算属性，定义了函数,当成属性来用，不用加括号
+    computed: {//计算属性多次调用使只执行一次，效率更高
+      fullname: function () {
+        return this.message + ' ' + this.msg
+      },
+      totalPrice: function () {
+        let result = 0
+        for (let i = 0; i < this.books.length;i++){
+          result += this.books[i].price
+        }
+        return result
+      }
+    },
+  })
+</script>
+
+</html>

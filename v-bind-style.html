@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- 动态绑定样式，组件化（可复用）开发比较重要 -->
+<!-- 相同的组件应用在不同的场景需要不同的样式 -->
+
+<body>
+  <div id="app">
+    <!-- 传入对象,key为css属性名，value为属性值 -->
+    <!-- <h1 :style="{font-size:50px}">{{message}}</h1> 这样会报错，把50px当成了变量 -->
+    <h1 :style="{fontSize:'50px'}">记得属性值加引号{{message}}</h1>
+    <h1 :style="{fontSize:size+'px',color:col}">记得属性值加引号{{message}}</h1>
+    <!-- 如果太长也可以封装成函数 -->
+    <!-- 数组语法 -->
+    <h1 :style="[basestyle,basestyle2]">{{message}}</h1>
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      size:'100',
+      col:'red',
+      basestyle:{
+        backgroundColor:'red'
+      },
+      basestyle2:{
+        fontSize:'50px'
+      }
+    },
+    methods: {
+    },
+  })
+</script>
+
+</html>

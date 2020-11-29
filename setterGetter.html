@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      msg: 'aaaa'
+    },
+    computed: {
+      fullname: function () {
+        return this.message + this.msg
+      },//实际是简写
+      //完整写法
+      fullname: {
+        set: function (newValue) {
+          //一般是空的，不用
+          console.log('执行了')
+        },//fullname = "aaa" ,实际上是把值传给了set函数，作为其参数
+        get: function () {
+          return this.message + this.msg
+        }
+      }//实际是个属性,有set和get方法,使用属性时，会调用get方法
+    },
+    methods: {
+    },
+  })
+</script>
+
+</html>
