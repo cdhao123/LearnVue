@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 满足满足条件才渲染，否则不渲染 -->
+    <div v-if="show">{{message}}</div>
+    <!-- v-else:条件不满足，则渲染其他的 -->
+    <h1 v-else="show">当show为false时则显示</h1>
+    <!-- v-else-if -->
+    <div v-if="score>=90">A</div>
+    <div v-else-if="score>=80">B</div>
+    <div v-else-if="score>=60">C</div>
+    <div v-else>D</div>
+    <h1 v-show="false">V-SHOW</h1>
+    <!-- v-if决定的是是否显示，元素实际上不存在 -->
+    <!-- v-show决定是否渲染，元素实际上不存在 -->
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      show: false,
+      score:57
+    },
+    methods: {
+    },
+  })
+</script>
+
+</html>

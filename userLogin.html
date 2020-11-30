@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <span v-if="flag">邮箱登录<input type="text" key="aaa"></span>
+    <span v-else>手机登录<input type="text"></span>
+    <button @click="flag = !flag">切换类型</button>
+    <!-- 小问题 当切换之后，用户输入的源数据会保留 -->
+    <!-- 虚拟dom，会尽可能的复用已有的元素 -->
+    <!-- 要决定是否复用，添加key属性，如果key不一样，则不会复用 -->
+  </div>
+</body>
+<script>
+let app = new Vue({
+el:'#app',
+data:{
+message:'Hello',
+flag:true
+},
+methods: {
+},
+})
+</script>
+</html>

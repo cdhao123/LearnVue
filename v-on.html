@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{counter}}
+    <!-- 如果在事件监听时调用的方法不需要传入参数，可以不加括号 -->
+    <button @click="add">+</button>
+    <button @click="minus(counter)">有传入，返回正确值</button>
+    <button @click="minus">没有传入，返回event</button>
+    <!-- 如果要传入参数而不加括号，会出问题，结果是undefined -->
+    <button @click="minus(counter,$event)">没有传入，返回event</button>
+    <!-- 又要传入event，又要参数,不能直接写event，会当成变量 -->
+    <!-- 前面加$,vue会自动解析成event -->
+
+
+    <!-- v-on修饰符 -->
+    <!-- stop -->
+    <div @click="divclick" class="divclick"><button @click.stop="btnclick">修饰符</button></div>
+    <!-- prevent 阻止默认事件-->
+    <form action="baidu"><br>
+      <input type="submit" value="提交">
+      <!-- 不希望它提交，而是我对其修改 -->
+      <input type="submit" value="提交" @click.prevent="submitclick">
+
+    </form>
+
+    <!-- 监听某个键盘按键的点击 -->
+    <input type="text" @keyup="keyclickup">
+    <!-- 如果要监听特定的案件 -->
+    <br>
+    <input type="text" @keyup.enter="keyclickup">
+    <!-- once 只出发一次 -->
+    <br>
+    <button @click.once="btnonce">once</button>
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      counter: 0
+    },
+    methods: {
+      add() {
+        this.counter++
+      }, minus(i, event) {
+        this.counter--
+        let b = i - 5
+        console.log('当前次数-5等于:' + b)
+        console.log(i)//如果没传入参数，而要求输出参数，vue会将浏览器生成的event对象作为参数参入
+        console.log(event)
+      },
+      divclick() {
+        console.log('盒子被点击')
+      },
+      btnclick() {
+        console.log('按钮被点击')
+      },//由于事件冒泡，事件都会被执行
+      //如果只想在div被点击的时候才执行div被点击
+      submitclick(){
+        console.log('提交了')
+        //添加了prevent之后，阻止了prevent事件，我们可以自己提交
+      },
+      keyclickup(){
+        console.log('执行了')
+      },
+      btnonce(){
+        console.log('执行了')
+      }
+    }
+  })
+</script>
+<style>
+  button {
+    display: block
+  }
+
+  .divclick {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+  }
+</style>
+
+</html>

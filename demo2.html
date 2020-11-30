@@ -10,13 +10,13 @@
 
 <body>
   <div id="app">
-    <input type="text" v-model="input">
+    <input type="text" v-model="input" @keyup.enter="add" placeholder="回车也可添加任务">
     <button @click="add">添加任务</button>
     <li v-for="(items,index) in list">
       {{items}}
-      <button @click="del(index)">删除</button>
-      <button @click="top(index)" >上移</button>
-      <button @click="down(index)" disabled="flag">下移</button>
+      <button @click="del(index)" >删除</button>
+      <button @click="top(index)" :disabled="btnup(index)">上移</button>
+      <button @click="down(index)" :disabled="btndown(index)">下移</button>
     </li>
     <h1 v-once>
       {{count}}
@@ -31,9 +31,7 @@
       name: "Zhangsan",
       list: ['划水', '吃饭', '睡觉', '摸鱼'],
       count: 1,
-      mission: "划水",
-      input: "123",
-      flag: false
+      input: "",
     },
     methods: {
       plus: function () {
@@ -77,6 +75,20 @@
         var tmp = this.list[index]
         Vue.set(this.list, index, this.list[index + 1])
         Vue.set(this.list, index + 1, tmp)
+      },
+      btnup(index){
+        if (index == 0){
+          return true
+        }else{
+          return false
+        }
+      },
+      btndown(index){
+        if (index == this.list.length - 1){
+          return true
+        }else{
+          return false
+        }
       }
     },
   })

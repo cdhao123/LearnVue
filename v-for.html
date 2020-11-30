@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"><ul>
+    <!-- 在遍历的过程中没有使用索引值 -->
+    <li v-for="item in names">{{item}}</li>
+  <!-- 使用索引 -->
+  <li v-for="(item,index) in names">{{index}}{{name}}</li>
+
+  <!-- 遍历对象 -->
+  <ul>
+    <li v-for="item in info">{{item}}</li>
+  </ul>
+  </ul></div>
+  
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      names: ['a', 'b', 'c', 'd'],
+      info:{
+        name:'aaa',
+        age:18,
+        hobby:'swim'
+      }
+    },
+    methods: {
+    },
+  })
+</script>
+
+</html>

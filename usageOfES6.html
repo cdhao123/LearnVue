@@ -5,3 +5,41 @@ let有作用域的概念
 引起的问题：
 作用域之外可以更改作用域之内的数据
 通过闭包解决
+
+ES5 js if 和for没有作用域 而函数有作用域
+es6加入了let
+
+p27 p28
+<script>
+  const name = 'aaa';//定义一个常量，不能被修改
+  // name = 'bbb'; 修改会报错
+  const obj = {
+    name: 'aaa',
+    age: 18,
+    hobby: 'swim'
+  }//常量定义的对象不能被修改，但可以改变对象内部属性的值
+  obj.age = 90;//可以执行
+  //age实际保存的是内存地址，用const修饰之后内存地址就不能更改了
+  //修改age实际上是修改了age储存的地址，而没有修改obj的地址
+
+  //对象字面量的增强写法
+  let name = 'aaa'
+  let age = 19
+  let hobby = 'swim'
+
+  let obje = {
+    name,
+    age,
+    hobby,
+  }//新写法，会自动把变量的名子作为key，变量的值作为value
+
+  //函数的增强写法
+  let obj3 = {
+    run(){
+
+    },//简写
+    run:function(){
+
+    }//原来写法
+  }
+</script>
