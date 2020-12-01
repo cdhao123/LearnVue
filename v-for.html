@@ -18,6 +18,10 @@
   <!-- 遍历对象 -->
   <ul>
     <li v-for="item in info">{{item}}</li>
+    <!-- 这样获取的只是value -->
+     <li v-for="(key,value,index) in info" :key="value">{{index}} {{key}} {{value}}</li>
+     <!-- 使用v-for使推荐加上key属性,这样能加强复用效率，绑定的key对应关系-->
+     <!-- 如果数据内容有重复的化。。。 -->
   </ul>
   </ul></div>
   

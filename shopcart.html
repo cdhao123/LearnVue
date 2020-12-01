@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <table>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>date</th>
+          <th>price</th>
+          <th>number</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(items,index) in books">
+          <!-- <th v-for="item in items"></th> 不建议，每列的操作太多，分别写 -->
+          <td>{{items.name}}</td>
+          <td>{{items.id}}</td>
+          <td>{{items.price | showPrice}}</td>
+          <!-- filters过滤器的使用 -->
+          <td><button @click="add(index)">+</button>{{items.number}} <button @click="sub(index)" :disabled="items.number <= 1">-</button></td>
+          <td><button>移除</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      books: [{
+        id: 100, name: 'unix编程艺术', price: 120, number: 2
+      },
+      { id: 100, name: '代码大全', price: 120, number: 3 },
+      { id: 100, name: '深入理解计算机原理', price: 120, number: 4 },
+      { id: 100, name: '现代操作系统', price: 120, number: 5 }
+      ]
+    },
+    methods: {
+      add(index){
+        this.books[index].number ++
+      },
+      sub(index){
+        this.books[index].number --
+      }
+    },
+    filters:{
+      showPrice(price){
+        return '￥' + price.toFixed(2)
+      }
+    }
+  })
+</script>
+
+</html>

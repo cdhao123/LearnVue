@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="items in letters" :key="items">{{items}}</li>
+    </ul>
+    <button @click="addNew">对数组追加新元素</button>
+    <br>
+    <button @click="update2">通过数组索引值改变数组元素（不是响应式，用splice替代）</button>
+    <button @click="del">pop删除元素</button>
+    <button @click="shift1">shift删除第一个元素</button>
+    <button @click="unshift1">unshift在第一个添加元素</button>
+    <button @click="variableArguement(10,20,30)">传入可变参数</button>
+    <button @click="insert">splice用法一</button>
+    <button @click="splice2">splice用法二</button>
+    <button @click="splice3">splice用法三</button>
+    <button @click="set">使用vueset方法改变数组元素值</button>
+  </div>
+</body>
+<script>
+let app = new Vue({
+el:'#app',
+data:{
+message:'Hello',
+letters:['a','b','c','d']
+},
+methods: {
+  //哪些数组方法是响应式的
+  addNew(){
+    this.letters.push('添加了1','添加了2','添加了3')
+  },
+  update2(){
+    this.letters[0] = '改变了'
+  },
+  del(){
+    this.letters.pop()
+  },
+  shift1(){
+    this.letters.shift()
+  },
+  unshift1(){
+    this.letters.unshift('aaaa')
+  },
+  variableArguement(...num){
+    this.letters.push(num)
+  },
+  insert(){
+    this.letters.splice(2,1)//从第二个开始，删除一个元素
+  },
+  splice2(){
+    this.letters.splice(2,2,'替换一个','替换两个')//替换，要替换哪些，就传入哪些
+  },
+  splice3(){
+    this.letters.splice(1,0,'a','b','c','d')//第二个参数为0，则插入元素
+  },
+  //还有sort,reverse 都为响应式
+  set(){
+    Vue.set(this.letters, 0, '通过vueset改变')
+  }
+},
+})
+</script>
+<style>
+  button{
+    display: block;
+  }
+</style>
+</html>
