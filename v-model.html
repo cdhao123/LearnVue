@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用v-model实现双向绑定 -->
+    <input type="text" v-model="message"><br>
+    {{message}}
+    <!-- 是双向绑定，input内容改变，message的数据也会改变 -->
+
+    <!-- 双向绑定的原理 -->
+    <input type="text" :value="message" @input="refresh">
+    <input type="text" :value="message" @input="message = $event.target.value">
+    <!-- v-bind单向绑定，数据实时反映到界面上，同时监听input事件-->
+
+    <h1>v- model的其他类型</h1>
+    <input type="radio" id="male" name="sex" value="男" v-model="sex">男
+    <input type="radio" id="female" name="sex" value="女" v-model="sex">女
+    <h1>{{sex}}</h1>
+    <!-- 通过name属性实现互斥 -->
+    <!-- 通过v-model将value和sex绑定 -->
+  </div>
+</body>
+<script>
+let app = new Vue({
+el:'#app',
+data:{
+message:'Hello',
+sex:'男' //默认值
+},
+methods: {
+  refresh(event){ //通过事件获取最新的value
+    this.message = event.target.value
+  }
+},
+})
+</script>
+</html>

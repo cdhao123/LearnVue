@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      books: [{
+        id: 100, name: 'unix编程艺术', price: 120, number: 2
+      },
+      { id: 100, name: '代码大全', price: 120, number: 3 },
+      { id: 100, name: '深入理解计算机原理', price: 120, number: 4 },
+      { id: 100, name: '现代操作系统', price: 120, number: 5 }
+      ],
+      arr =[1, 2, 3, 44, 2, 4, 5, 6, 7]
+    },
+    methods: {
+    },
+    computed: {
+      total() {
+        for (let i of this.books) {
+          console.log(i)
+        }//用of可以直接获取到里面的元素
+      },
+      //filter回调函数
+      //filter(回调函数) 回调函数必须返回bool值，回调函数会作用到每一个函数
+      //如果返回真，则保留到新的数组，返回false就不添加到新数组
+      fitl() {
+        let newarr = arr.filter(function (n) {
+          return n < 20 //是个布尔值
+        })
+      },
+      //map 函数的使用
+      usemap() {
+        let new2arr = this.arr.map(function (n) {
+          return n * 2
+        })//里面也是回调函数，作用到每一个元素，返回值返回到新的数组 
+      },
+      //reduce的使用
+      //作用：对数组中所有内容汇总
+      usereduce() {
+        //reduce需传入两个参数
+        let new3arr = this.arr.reduce(function (previousValue, n) {
+          return previousValue + n //可以得到数组元素之和
+        }, 0)//第一个参数为函数，第二个是0
+        //previous 为上一次函数执行是的返回值，如果为第一次，则为初始值n
+      },
+      inall() {
+        let total = this.arr.filter(function (n) {
+          return n < 20
+        }).map(function (n) {
+          return n * 2
+        }).reduce(function (previous, n) {
+          return previous + n
+        }, 0) //将数组中所有小于20的数字 乘以2 再相加求和
+      }
+    }
+  })
+</script>
+
+</html>
