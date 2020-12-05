@@ -7,12 +7,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <div id="app">
     <h2>title</h2>
@@ -29,12 +31,16 @@
     </div>
     <!-- 组件可以嵌套 -->
   </div>
+  <div id="app2">
+    <h2>这是第二个vue实例</h2>
+    <mycpn></mycpn>
+  </div>
 </body>
 <script>
   //1.创建组件构造器对象
   const cpnConstructor = Vue.extend(
     {
-      template:`<div>
+      template: `<div>
                 <h2>title</h2>
                 <p>content1</p>
                 <p>content2</p></div> 
@@ -44,15 +50,25 @@
   //组件构造器必须要写在vue实例的上面
 
   //2.注册组件
-    Vue.component('mycpn',cpnConstructor)//第一个参数为组件名称
+  Vue.component('mycpn', cpnConstructor)//第一个参数为组件名称
+  //注册的是全局组件(可以在多个vue的实例下面使用)
   //3.使用组件(在可视页面里)
-let app = new Vue({
-el:'#app',
-data:{
-message:'Hello'
-},
-methods: {
-},
-})
+  let app2 = new Vue({
+    el: '#app2'
+  })
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+    components:{
+      cpn:cpnConstructor
+      //属性名是使用组件的标签名,值是组件构造器的名字
+      //这样注册的是局部,只能在当前vue实例使用
+    }
+  })
 </script>
+
 </html>

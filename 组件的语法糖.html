@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+  </div>
+</body>
+<script>
+  Vue.component('cpn1', {
+    template: `
+    <div>
+      <h2>我是标题</h2>
+      <h2>content</h2>
+      <mycpn2></mycpn2>
+        
+      </div>`
+  })//省去了extend
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+    components: {
+      'cpn2': {
+        template: `
+      <div>
+        <h2>局部组件语法糖</h2>
+        <h2>content</h2>
+        <mycpn2></mycpn2>
+          
+        </div>`
+
+      }
+    }//局部注册的语法糖
+  })
+</script>
+
+</html>

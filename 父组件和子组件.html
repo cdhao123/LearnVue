@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <mycpn1></mycpn1>
+    <!-- 子组件不能直接被使用 -->
+  </div>
+</body>
+<script>
+  const cpn2 = Vue.extend({
+    template: `<div>
+      <h2>我是标题2</h2>
+      <h2>content2</h2>
+      </div>`,
+
+  })
+  const cpn1 = Vue.extend({
+    template: `
+    <div>
+      <h2>我是标题</h2>
+      <h2>content</h2>
+      <mycpn2></mycpn2>
+        
+      </div>`,
+    components: {//组件构造器也可以添加components
+      mycpn2: cpn2 //既不是全局注册,也不是局部注册
+      //这样就可以在当前组件的template中使用该组件
+      //被套娃的那个组件一定要写在上面
+      //被套娃的组件不能被直接使用,只能在父组件内使用否则要重新注册
+    }
+  })//此过程中,cpn1是父组件,cpn2是子组件
+    //实际上vue实例是顶层组件,称为root
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+    components: {
+      mycpn1: cpn1 //组件一套组件二,再在此处注册构造器1
+    }
+  })
+</script>
+
+</html>
