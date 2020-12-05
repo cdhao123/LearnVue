@@ -10,13 +10,18 @@
 
 <body>
   <div id="app">
+    <div>
+      {{name + 'gmx'}}
+    </div>
     <input type="text" v-model="input" @keyup.enter="add" placeholder="回车也可添加任务">
+    <h2 >{{input}}</h2>
     <button @click="add">添加任务</button>
+    <!-- <button v-on:keyup="add"></button> -->
     <li v-for="(items,index) in list">
       {{items}}
-      <button @click="del(index)" >删除</button>
-      <button @click="top(index)" :disabled="btnup(index)">上移</button>
-      <button @click="down(index)" :disabled="btndown(index)">下移</button>
+      <button @click="del2(index)" >删除</button>
+      <button @click="top(index)" :disabled="false">上移</button>
+      <button @click="down(index)" :disabled="index == list.length-1">下移</button>
     </li>
     <h1 v-once>
       {{count}}
@@ -25,6 +30,10 @@
   </div>
 </body>
 <script>
+  // {
+  //   height:180,
+  //   age:18
+  // }
   let app = new Vue({
     el: '#app',
     data: {
@@ -32,6 +41,11 @@
       list: ['划水', '吃饭', '睡觉', '摸鱼'],
       count: 1,
       input: "",
+      style0:{
+        height:'100px',
+        width:'100px',
+        fontSize:'100px'
+      }
     },
     methods: {
       plus: function () {
@@ -51,12 +65,14 @@
           if (i != index) {
             datas[m] = this.list[i]
             m++
-
             // datas.push()
           }
         }
         this.list = datas
         // this.list=this.list.filter((item,i)=>i!=index);
+      },
+      del2(index){
+        this.list.splice(index,0,"saaa","bbbb","cccc")
       },
       top: function (index) {
         if (index == 0) {
@@ -79,21 +95,14 @@
       btnup(index){
         if (index == 0){
           return true
-        }else{
-          return false
         }
       },
       btndown(index){
         if (index == this.list.length - 1){
           return true
-        }else{
-          return false
         }
       }
     },
   })
 </script>
-<!-- <style>
-</style> -->
-
 </html>

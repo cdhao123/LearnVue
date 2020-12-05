@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2 v-if="score>90">A</h2>
+    <h2 v-else-if="score>=80">B</h2>
+    <h2 v-else>C</h2>
+    <h2>{{total()}}</h2>
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      score: 80,
+      book: [
+        {
+          name: '高等数学',
+          price: -100,
+        },
+        {
+          name: '毛概',
+          price: 100000000000,
+        },
+        {
+          name: '思修',
+          price: 0,
+        }
+      ]
+    },
+    methods: {
+      total() {
+        let arr = [1, 2, 3, 4, 5, 114514, 4, 5, 7, 8, 5, 34, 36, 5767,]
+        let final = arr.filter(function (n) {
+          return n > 10
+        }).map(function (n) {
+          return n * 2
+        }).reduce(function (preValue, n) {
+          return n + preValue
+        }, 0)
+        return final
+        // return totalPrice
+      }
+    },
+  })
+</script>
+
+</html>

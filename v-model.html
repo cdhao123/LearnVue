@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <div id="app">
     <!-- 使用v-model实现双向绑定 -->
@@ -24,20 +26,66 @@
     <h1>{{sex}}</h1>
     <!-- 通过name属性实现互斥 -->
     <!-- 通过v-model将value和sex绑定 -->
+
+    <!-- v-model与checkbox -->
+    <h1>v-model与checkbox</h1>
+    <label for="agree">
+      <input type="checkbox" id="protocol" v-model="isagree">同意协议
+    </label>
+    <button :disabled="!isagree">下一步</button>
+    <h2>多选框</h2>
+    <input type="checkbox" value="划水" v-model="hobbies">划水
+    <input type="checkbox" value="游泳" v-model="hobbies">游泳
+    <h2>{{hobbies}}</h2>
+    <h1>v-model与select</h1>
+    <select name="城市" id="" v-model="city">城市
+      <option value="上海">sh</option>
+      <option value="北京">bj</option>
+      <option value="广州">gz</option>
+      <option value="西安">xa</option>
+    </select>
+    <h2>你的选项：{{city}}</h2>
+
+    <h1>多选</h1>
+    <select name="城市" id="" v-model="cities" multiple>城市
+      <option value="上海">sh</option>
+      <option value="北京">bj</option>
+      <option value="广州">gz</option>
+      <option value="西安">xa</option>
+    </select>
+    <h2>你的选择：{{cities}}</h2>
+    <!-- 注意要用数组接受 -->
+    <h1>v-model修饰符</h1>
+    <h2>lazy:lazy load</h2>
+    <input type="text" v-model.lazy="message" >
+    <h2>{{message}}</h2>
+    <!-- 只有在失去焦点、回车时才会更新 -->
+    <h2>number</h2>
+    <input type="number" v-model.number="age">
+    <!-- v-model默认绑定过来是string类型 -->
+    <h2>trim:除去两边多余的空格</h2>
+    <input type="text" v-model.trim="msg">
   </div>
 </body>
 <script>
-let app = new Vue({
-el:'#app',
-data:{
-message:'Hello',
-sex:'男' //默认值
-},
-methods: {
-  refresh(event){ //通过事件获取最新的value
-    this.message = event.target.value
-  }
-},
-})
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      sex: '男', //默认值,
+      isagree:true,
+      hobbies:[],
+      city:"上海",
+      cities:[],
+      age:0,
+      msg:''
+    },
+    methods: {
+      refresh(event) { //通过事件获取最新的value
+        this.message = event.target.value
+      }
+    },
+  })
 </script>
+
 </html>
