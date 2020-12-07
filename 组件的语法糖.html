@@ -14,6 +14,21 @@
     <cpn2></cpn2>
   </div>
 </body>
+<script type="text/x-template" id="cpn">
+  <div>组件的抽离写法，类型为text/x-template</div>
+</script>
+<template id="cpn2">
+  <div>或者直接写在template里，要给定id
+    <br>
+    组件内部不能访问vue实例的数据(此处应有message) {{message}}
+    <!-- 组件要使用变量，应该使用内部的 -->
+    <br>
+    {{title}}
+  </div>
+  
+</template>
+<!-- 常用 -->
+
 <script>
   Vue.component('cpn1', {
     template: `
@@ -33,13 +48,12 @@
     },
     components: {
       'cpn2': {
-        template: `
-      <div>
-        <h2>局部组件语法糖</h2>
-        <h2>content</h2>
-        <mycpn2></mycpn2>
-          
-        </div>`
+        template: '#cpn2',
+        data() {
+          return {
+            title:'这是组件内部的变量'
+          }//组件内定义的data只能是function，不能是对象，并且要返回对象
+        },
 
       }
     }//局部注册的语法糖

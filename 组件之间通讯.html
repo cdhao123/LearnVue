@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- 项目中有很多的组件，大组件发送网络请求获取数据，需要传递给实际显示的小组件 -->
+<!-- 但是子组件不能使用父组件或vue实例的数据 -->
+
+<!-- 通过props向子组件传递数据 -->
+<!-- 通过事件向父组件传递数据（emit） -->
+<body>
+  <div id="app">
+    <!-- 在此处绑定要传入的数据，然后会把str，message当成变量查找 -->
+    <cpn :cstr="str" :cmessage="message"></cpn> 
+  </div>
+</body>
+
+<template id="cpn">
+  <div>
+    <div><ul>
+      <li v-for="items in cstr">{{items}}</li>
+    </ul></div>
+    <div>{{cmessage}}</div>
+    <div>
+      <h2>未传入cmessage2的值，显示为定义的默认值</h2>
+      <h2>{{cmessage2}}</h2>
+    </div>
+  </div>
+</template>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      str:['aaa','bbb','ccc']//父组件之中的数据
+    },
+    methods: {
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        //props:['cstr','cmessage'] //props的值是一个数组，里面放想要传进去的数据（看成变量）
+        //除了数组，还有其他写法
+        props:{
+          cstr:Array,
+          cmessage:String, //写成对象，不仅可以设置属性，还可以限制传入的数据类型
+          cmessage2:{
+            type:String,
+            default:'aaaaaa',
+            required:true //设置成必须传这个属性，否则会报错
+          },//里面的属性还可以写成对象的形式，可以设置传入的类型和默认值
+          cmessage3:{
+            type:Array,
+            default(){
+              return []
+            }//当类型为数组时，默认值必须是函数，否则会报错
+          }
+        }
+      }
+    }
+  })
+</script>
+
+</html>

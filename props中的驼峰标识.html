@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 不支持驼峰，否则加.camel -->
+    <cpn :cinfo="info" :cInfo = "info"></cpn>
+    <!-- 要使用驼峰，前面加- -->
+    <cpn :cinfo="info" :c-info = "info"></cpn>
+  </div>
+</body>
+<template id="cpn">
+  <div>
+    <h2>
+      {{cinfo}}
+      <br>
+      <h2>显示了空对象</h2>
+      {{cInfo}}
+    </h2>
+  </div>
+</template>
+
+<script>
+  const cpn = {
+    template: '#cpn',
+    props: {
+      cinfo: {
+        type: Object,
+        default() {
+          return {}
+        },
+      },
+      //为什么不写cInfo
+      cInfo: {
+        type: Object,
+        default() {
+          return {}
+        },
+      }
+    }
+  }
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      info: {
+        price: 15,
+        name: 'aaa',
+        date: 114
+      }
+    },
+    methods: {
+    },
+    components: {
+      cpn
+    }
+  })
+</script>
+
+</html>

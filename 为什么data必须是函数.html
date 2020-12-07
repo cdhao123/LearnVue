@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>三个组件实例，每个data对象都不相同，不会相互影响</h2>
+    <counter></counter>
+    <counter></counter>
+    <counter></counter>
+  </div>
+</body>
+<template id="cpn">
+  <div>
+    <h2>当前计数:{{count}}</h2>
+    <button @click="add">+</button><button @click="minus">-</button>
+  </div>
+</template>
+<script>
+  Vue.component('counter', {
+    template:'#cpn',
+    data() {
+      return {
+        count:0
+      }//每次引用实例，都会使用新的count，每次返回了新的对象，内存地址都不一样
+       //如果data不是函数，则共用一个data
+       //本质是利用函数返回的对象是相互独立的
+    },
+    methods:{
+      add(){
+        this.count ++
+      },
+      minus(){
+        this.count--
+      }//函数也可以写在组件里
+    }
+  })
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+  })
+</script>
+
+</html>

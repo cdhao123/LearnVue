@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <iframe width="739" height="554" src="https://www.youtube.com/embed/qi2lllCRLtQ" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+  <div id="app">
+    <!-- 父组件监听自定义的itemclick事件，函数写在父组件里 -->
+    <cpn :cinfo="info" :cInfo="info" @itemclick="cpnclick($event)"></cpn>
+    <!-- 这里的cpnclick只能传入事件$event，或者不加括号 -->
+  </div>
+</body>
+<template id="cpn">
+  <div>
+    <h2>
+      {{cinfo}}
+    </h2>
+    <button v-for="item of catagories" @click="btnclick(item)">{{item.name}}</button>
+    <!-- 想告诉父组件，按钮被点击了 -->
+  </div>
+</template>
+
+<script>
+  //子组件
+  const cpn = {
+    template: '#cpn',
+    props: {
+      cinfo: {
+        type: Object,
+        default() {
+          return {}
+        },
+      },
+    },
+    data() {
+      return {
+        catagories: [{
+          id: 'aaa',
+          name: '热门'
+        }, {
+          id: 'bbb',
+          name: '冷门'
+        }, {
+          id: 'ccc',
+          name: '划水'
+        }, {
+          id: 'ddd',
+          name: '睡觉'
+        },
+        ]
+      }
+    },
+    methods: {
+      btnclick(item) {
+        console.log(item.name)
+        this.$emit('itemclick', item) //子组件发射了一个事件，父组件需要接受
+        //同时传入item参数，这样就可以把子组件的数据传给父组件，父组件接受
+      }
+    },
+  }
+  //父组件
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      info: {
+        price: 15,
+        name: 'aaa',
+        date: 114
+      }
+    },
+    methods: {
+      cpnclick(data) {
+        console.log('监听到了')
+        console.log(data.name)
+      }//此处传入了父组件监听的事件
+    },
+    components: {
+      cpn
+    }
+  })
+
+</script>
+
+</html>
