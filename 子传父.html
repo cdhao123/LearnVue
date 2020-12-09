@@ -14,7 +14,7 @@
     allowfullscreen></iframe>
   <div id="app">
     <!-- 父组件监听自定义的itemclick事件，函数写在父组件里 -->
-    <cpn :cinfo="info" :cInfo="info" @itemclick="cpnclick($event)"></cpn>
+    <cpn :cinfo="info" :cInfo="info" @itemclick="cpnclick"></cpn>
     <!-- 这里的cpnclick只能传入事件$event，或者不加括号 -->
   </div>
 </body>
@@ -23,7 +23,7 @@
     <h2>
       {{cinfo}}
     </h2>
-    <button v-for="item of catagories" @click="btnclick(item)">{{item.name}}</button>
+    <button v-for="item of catagories" @click="btnclick(3)">{{item.name}}</button>
     <!-- 想告诉父组件，按钮被点击了 -->
   </div>
 </template>
@@ -60,7 +60,7 @@
     },
     methods: {
       btnclick(item) {
-        console.log(item.name)
+        console.log(item)
         this.$emit('itemclick', item) //子组件发射了一个事件，父组件需要接受
         //同时传入item参数，这样就可以把子组件的数据传给父组件，父组件接受
       }
@@ -80,7 +80,7 @@
     methods: {
       cpnclick(data) {
         console.log('监听到了')
-        console.log(data.name)
+        console.log(data)
       }//此处传入了父组件监听的事件
     },
     components: {
