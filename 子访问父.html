@@ -1,0 +1,79 @@
+<!-- 要父子之间直接通讯，而不是简单的传输数据
+父访问子:$children 或 $ref
+子访问父:$parent -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+  </div>
+</body>
+<template id="mycpn">
+  <div>
+    <h2>子组件</h2>
+
+    <ccpn></ccpn>
+  </div>
+</template>
+
+<template id="ccpn">
+  <div>
+    <h2>ccpn</h2>
+    <button @click="btnclick">子组件的按钮，用来访问父组件</button>
+  </div>
+</template>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+
+    },
+    components: {
+      cpn: {
+        template: '#mycpn',
+        methods: {
+
+        },
+        data() {
+          return {
+            name: '我是cpn的name'
+          }
+        },
+        components: {
+          ccpn: {
+            template: '#ccpn',
+            methods: {
+              btnclick() {
+                console.log(this.$parent)
+                console.log(this.$parent.name)
+              // 访问根组件,message是vue实例里的
+                console.log(this.$root.message)
+
+
+              }//ccpn是cpn的子组件
+              //cpn是vue的子组件
+              //用的很少
+
+              
+            },
+          },
+        }
+      }
+
+    }
+  })
+</script>
+
+</html>

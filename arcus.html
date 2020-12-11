@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div id="slide">
+      <div class="key"><div :style=""></div></div>
+      <div class="key"><div :style=""></div></div>
+      <div class="key"><div :style=""></div></div>
+      <div class="key"><div :style=""></div></div>
+    </div>:style=""
+  </div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      chart:[{id:0,time:1000,position:1},
+      {id:1,time:2000,position:1},
+      {id:2,time:3000,position:2},
+      {id:3,time:4000,position:2},
+      {id:4,time:5000,position:3},
+      {id:5,time:6000,position:3},
+      {id:6,time:7000,position:4},
+      {id:7,time:8000,position:4},]
+    },
+    methods: {
+    },
+  })
+</script>
+<style>
+  #slide{
+    width: 600px;
+    height: 700px;
+    background-color:blue;
+    margin: 0 auto;
+  }
+  .key{
+    display: flex;
+    float: left;
+    width: 150px;
+    height: 100%;
+    position: relative;
+    background-color: red;
+  }
+  .key div{
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+  }
+</style>
+</html>

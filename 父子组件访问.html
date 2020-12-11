@@ -1,0 +1,67 @@
+<!-- 要父子之间直接通讯，而不是简单的传输数据
+父访问子:$children 或 $ref
+子访问父:$parent -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn ref="aaa"></cpn>
+    <!-- 创建了多个子组件 -->
+    <button @click='btnclick'>按钮</button>
+  </div>
+</body>
+<template id="mycpn">
+  <h2>子组件</h2>
+</template>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+      btnclick() {
+        this.$children[0].showmessage()//打印子组件,是个数组的形式 （Vuecomponent类型）
+        // console.log(this.$children[0].showmessage()) //子组件中有showmessage函数
+        //如果有多个子组件呢
+        for (let c of this.$children) {
+          c.showmessage()
+          console.log(c.name)
+        }
+        //拿到子组件的第二种方法（防止下标改变）
+        // $refs
+        console.log(this.$refs.aaa)
+        // 返回了一个对象
+        // 需要给子组件绑定refs属性
+      }
+    },
+    components: {
+      cpn: {
+        template: '#mycpn',
+        methods: {
+          showmessage() {
+            console.log('hello')
+          },
+        },
+        data() {
+          return {
+            name: '子组件data'
+          }
+        },
+      }
+    }
+  })
+</script>
+
+</html>

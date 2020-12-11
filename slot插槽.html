@@ -1,0 +1,67 @@
+<!-- 让组件具有扩展性
+让使用者决定组件展示什么 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn>
+      <button>slot下的按钮</button>
+      <!-- 这个button会把插槽替换 -->
+    </cpn>
+    <cpn>
+      <span>哈哈啊哈</span>
+      <span>多个元素都会被slot替换</span>
+    </cpn>
+    <cpn>
+      <button>第三个按钮</button>
+    </cpn>
+    <cpn></cpn>
+    <!-- 这样的组件不具备扩展性 -->
+  </div>
+</body>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <!-- 这样的组件不具备扩展性 -->
+  </div>
+</body>
+
+<template id="cpn">
+  <div>
+    <h2>组件</h2>
+    <!-- 预留一个插槽，能随时更改 -->
+    <!-- 共同的东西封装成组件，不同的预留成插槽 -->
+    <slot>
+      <!-- slot里面放默认值，如果子组件没有传入，则显示默认值 -->
+      <button>slot指定的默认的按钮</button>
+    </slot>
+  </div>
+</template>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+    components:{
+      cpn:{
+        template:'#cpn'
+      }
+    }
+  })
+</script>
+
+</html>
