@@ -1,0 +1,53 @@
+<!-- 导出模块，导入（导出的）模块 -->
+
+<!-- 模块化的规范
+
+commomJS
+导出：
+module.exports = {
+  flag = flag,
+  sum = aFunctinon
+}//写在aaa.js文件中
+
+导入：
+let {flag,sum} = require('./aaa.js') 是简写
+把对象解析出来了
+
+let obj = require('./aaa.js')
+flag = obj.flag,
+sum = obj.aFunction
+
+-->
+
+<!-- ES6 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./模块化开发/aaa.js" type="module"></script>
+  <script src="./模块化开发/bbb.js" type="module"></script>
+  <script src="./模块化开发/ccc.js" type="module"></script>
+  <!-- 一定要加module才能用模块化 -->
+  <!-- 添加module属性，说明是模块化，不会有命名冲突 -->
+  <!-- 但会有问题，任何模块的数据不能相互引用，会提示undefined -->
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+  })
+</script>
+
+</html>

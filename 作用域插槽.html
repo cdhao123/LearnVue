@@ -1,0 +1,67 @@
+<!-- 父组件替换插槽中的标签，但是内容由子组件提供 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <!-- 使用span将插槽替换 -->
+    <span v-for="item in planguage"></span>
+    <!-- 以上是拿不到数据的，因为会在父组件中查找 -->
+    <!-- 现在要获取子组件的planguage -->
+    <!-- 如果第二次的展示不希望用常规展示，例如每个后面加一杠 -->
+    <cpn>
+      <template slot-scope="slot">
+        <span v-for="item in slot.data">
+          {{item}}-
+        </span>
+        <!-- .data使用的是slot标签内定义的data属性 -->
+      </template>
+    </cpn>
+    <cpn></cpn>
+  </div>
+</body>
+
+<template id="cpn">
+  <div>
+    <ul>
+      <li v-for="item in planguage">
+        {{item}}
+      </li>
+    </ul>
+    <!-- 给slot定义属性 -->
+    <slot :data="planguage"></slot>
+  </div>
+</template>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello'
+    },
+    methods: {
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data() {
+          return {
+            planguage: ['js', 'c', 'c#', 'python']
+          }
+        },
+      },
+    }
+  })
+</script>
+
+</html>
