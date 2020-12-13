@@ -17,4 +17,20 @@ let p = new person()
 console.log(na)
 console.log(aaa)
 
+// import App from './app.js'
+// 现在引用Vue文件
+import App from './Vue/App.vue'
+  new Vue({
+    el: '#app',
+    template: '<App/>',
+    // 把template的替换到app中
+    components: {
+      App
+    }
+  })
+// 这样就避免直接操作html文件了
+
+// 这样不能被webpack编译,需要配置对应的vueloder
+
+
 // aaa里面包含了na，要使用default导出的需要aaa.default
