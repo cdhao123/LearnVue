@@ -16,6 +16,9 @@ const routes = [
   {
     //动态路由
     path: '/home/:userid',
+    meta:{
+      title:'首页'
+    },
     component: home,//如果路径为home，则显示如下组件
   //创建子组件
     children:[
@@ -39,7 +42,10 @@ const routes = [
   },
   {
     path: '/about',
-    component: about
+    component: about,
+    meta:{
+      title:'关于'
+    }
   },
   {
     path:'',
@@ -58,6 +64,21 @@ const router = new VueRouter({
   routes,
   mode:'history'
   //转换成history模式
+
+})
+
+
+//全局导航守卫,要求传入一个函数
+//to和from其实就是route
+//前置钩子 ,跳转之前的回调
+router.beforeEach((to,from,next)=>{
+  next() //一定要调用next
+  //从from跳转到to
+  document.title = to.matched[0].meta.title
+})
+
+//后置钩子,aftereach,不需要回调next
+router.afterEach((to,from)=>{
 
 })
 

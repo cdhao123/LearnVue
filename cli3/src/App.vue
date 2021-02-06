@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <!-- 动态路由 -->
-      <router-link :to="'/home/'+userid">首页</router-link>
+      <router-link :to="'/home/' + userid">首页</router-link>
       <!-- 默认被渲染出a标签 -->
       <router-link to="/about" tag="button" replace>关于</router-link>
       <!-- 用tag渲染成button -->
@@ -12,9 +12,14 @@
       <button @click="aboutclick">关于</button>
       <router-link to="/profile">档案</router-link>
       <!-- 利用query传参数 -->
-      <router-link :to="{path:'/profile',query:{name:'aaa',age:18}}">档案</router-link>
+      <router-link :to="{ path: '/profile', query: { name: 'aaa', age: 18 } }"
+        >档案</router-link
+      >
       <button @click="profileclick">档案</button>
-      <router-view></router-view>
+      <!-- exclude:排除某个组件，使其不keep-alive -->
+      <keep-alive exclude="profile,about">
+        <router-view></router-view>
+      </keep-alive>
     </div>
     <!-- <router-view/> 决定渲染出的元素放在什么地方-->
   </div>
@@ -22,32 +27,32 @@
 
 <script>
 export default {
-  name:'App',
+  name: "App",
   //通过代码实现页面跳转
-  methods:{
-    homeclick(){
-      this.$router.push('/home')
+  methods: {
+    homeclick() {
+      this.$router.push("/home");
       //this.$router.replace('/home')
     },
-    aboutclick(){
-      this.$router.replace('/about')
+    aboutclick() {
+      this.$router.replace("/about");
     },
-    profileclick(){
+    profileclick() {
       this.$router.push({
-        path:'/profile',
-        query:{
-          name:'bbb',
-          age:19 // 通过函数的方式传入query
-        }
-      })
-    }
+        path: "/profile",
+        query: {
+          name: "bbb",
+          age: 19, // 通过函数的方式传入query
+        },
+      });
+    },
   },
-  data(){
+  data() {
     return {
-      userid:'lisi'
-    }
-  }
-}
+      userid: "lisi",
+    };
+  },
+};
 </script>
 
 <style>
@@ -68,8 +73,8 @@ export default {
   color: #2c3e50;
 }
 
-
-#nav a.router-link-exact-active , button.router-link-exact-active  {
+#nav a.router-link-exact-active,
+button.router-link-exact-active {
   color: #42b983;
 }
 </style>
