@@ -2,6 +2,7 @@ import {flag,sum,mul,person} from "./aaa.js"
 if(flag){
   console.log('找到了flag')
 }
+
 import na from "./aaa.js"
 
 // 全部导入

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+    </div>
+</body>
+
+<template id="cpn1">
+    <div>
+        <h2>title</h2>
+        <p>content1</p>
+        <p>content2</p>
+    </div>
+</template>
+
+<script>
+    //1.创建组件构造器对象
+    //2.注册组件
+    //3.使用组件(在可视页面里)
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello'
+        },
+        methods: {
+            fun() {
+
+            }
+        },
+        components: {
+            cpn: {
+                template: '#cpn1'
+            }
+        }
+    })
+
+</script>
+
+</html>

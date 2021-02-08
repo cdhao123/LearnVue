@@ -8,9 +8,9 @@ function sum(n1,n2){
 
 // 要使得flag可被其他引用
 
-export const obg  = {
-  flag:flag,
-  sum:sum
+export const obg = {
+  flag2:flag,
+  sum2:sum
 }
 
 // 或者
@@ -39,5 +39,4 @@ export default {
   name3,
   flag,
   sum,
-
 }
